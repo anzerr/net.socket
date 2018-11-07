@@ -1,4 +1,5 @@
-const events = require('events');
+const events = require('events'),
+	zlib = require('zlib');
 
 class Client extends events {
 
@@ -9,12 +10,16 @@ class Client extends events {
 	}
 
 	send(data) {
-		let d = Buffer.from(data);
-		const buf = Buffer.alloc(6);
-		buf.writeIntLE(d.length, 0, 6);
 		return new Promise((resolve) => {
-			this.socket.write(Buffer.concat([buf, d]), () => {
-				resolve();
+			zlib.deflate(data, (err, d) => {
+				if (err) {
+					throw err;
+				}
+				const buf = Buffer.alloc(6);
+				buf.writeIntLE(d.length, 0, 6);
+				this.socket.write(Buffer.concat([buf, d]), () => {
+					resolve();
+				});
 			});
 		});
 	}
@@ -25,7 +30,13 @@ class Client extends events {
 			this.buffer = this.buffer.slice(6, this.buffer.length);
 		}
 		if (this.size !== null && this.buffer.length >= this.size) {
-			this.emit('message', this.buffer.slice(0, this.size));
+			zlib.unzip(this.buffer.slice(0, this.size), (err, d) => {
+				if (err) {
+					throw err;
+				}
+				this.emit('message', d);
+			});
+
 			this.buffer = this.buffer.slice(this.size, this.buffer.length);
 			this.size = null;
 			this._parse();
