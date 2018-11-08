@@ -16,6 +16,10 @@ class Client extends base {
 		});
 	}
 
+	close() {
+		this.socket.destroy();
+	}
+
 	id() {
 		return this.key;
 	}
