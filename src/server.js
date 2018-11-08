@@ -16,9 +16,9 @@ class Server extends events {
 			}).on('error', () => {
 				this.socket[key] = null;
 			});
-			this.socket[key] = new Client(socket, key);
+			this.socket[key] = this.createClient(socket, key);
 			this.socket[key].on('message', (data) => {
-				this.emit('message', {client: this.socket[key], payload: data});
+				this.handleMessage(data, this.socket[key]);
 			});
 			this.emit('connect', this.socket[key]);
 		});
@@ -28,6 +28,22 @@ class Server extends events {
 		this.server.listen({host: this.uri.hostname, port: this.uri.port}, () => {
 			this.emit('open');
 		});
+	}
+
+	close() {
+		return new Promise((resolve) => {
+			this.server.close(() => {
+				resolve();
+			});
+		});
+	}
+
+	handleMessage(payload, client) {
+		return this.emit('message', {client: client, payload: payload});
+	}
+
+	createClient(socket, key) {
+		return new Client(socket, key);
 	}
 
 	key() {

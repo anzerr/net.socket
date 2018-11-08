@@ -9,7 +9,7 @@ class Client extends base {
 		this.uri = url.parse((uri.match(/^.*?:\/\//)) ? uri : 'tcp://' + uri);
 		this.socket = new Socket();
 		this.socket.connect(this.uri.port, this.uri.hostname, () => {
-			this.emit('connect');
+			this.handleConnection();
 		});
 		this.socket.on('error', (err) => {
 			this.emit('error', err);
@@ -21,6 +21,14 @@ class Client extends base {
 			this.buffer = Buffer.concat([this.buffer, data]);
 			this._parse();
 		});
+	}
+
+	close() {
+		this.socket.destroy();
+	}
+
+	handleConnection() {
+		return this.emit('connect');
 	}
 
 }

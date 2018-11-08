@@ -24,6 +24,10 @@ class Client extends events {
 		});
 	}
 
+	handleMessage(payload) {
+		return this.emit('message', payload);
+	}
+
 	_parse() {
 		if (!this.size && this.buffer.length > 0) {
 			this.size = this.buffer.readIntLE(0, 6);
@@ -34,7 +38,7 @@ class Client extends events {
 				if (err) {
 					throw err;
 				}
-				this.emit('message', d);
+				this.handleMessage(d);
 			});
 
 			this.buffer = this.buffer.slice(this.size, this.buffer.length);
