@@ -1,6 +1,6 @@
 const base = require('../base.js');
 
-class Client extends base {
+class Client extends base { // server
 
 	constructor(socket, key) {
 		super();
@@ -17,7 +17,11 @@ class Client extends base {
 	}
 
 	close() {
-		this.socket.destroy();
+		try {
+			this.socket.destroy();
+		} catch(e) {
+		// probably closed
+		}
 	}
 
 	id() {

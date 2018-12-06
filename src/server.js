@@ -25,12 +25,20 @@ class Server extends events {
 		this.server.on('error', (e) => {
 			this.emit('error', e);
 		});
+		this.server.on('close', (e) => {
+			this.emit('close', e);
+		});
 		this.server.listen({host: this.uri.hostname, port: this.uri.port}, () => {
 			this.emit('open');
 		});
 	}
 
 	close() {
+		for (let i in this.socket) {
+			if (this.socket[i]) {
+				this.socket[i].close();
+			}
+		}
 		return new Promise((resolve) => {
 			this.server.close(() => {
 				resolve();
