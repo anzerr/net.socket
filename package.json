@@ -8,7 +8,7 @@
 		"setup": "npm install --only=prod"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "anzerr",
 	"license": "ISC",
 	"devDependencies": {
 		"eslint": "^5.8.0",
@@ -16,5 +16,17 @@
 	},
 	"eslintConfig": {
 		"extends": "eslint-config-basic"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/anzerr/net.socket.git"
+	},
+	"engines": {
+		"node": ">= 0.10.0"
+	},
+	"types": "index.d.ts",
+	"bugs": {
+		"url": "https://github.com/anzerr/net.socket/issues"
+	},
+	"homepage": "https://github.com/anzerr/net.socket#readme"
 }
