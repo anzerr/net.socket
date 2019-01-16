@@ -1,26 +1,20 @@
+
 const events = require('events'),
-	zlib = require('zlib');
+	util = require('./util.js'),
+	{promisify} = require('util');
 
 class Client extends events {
 
 	constructor() {
 		super();
 		this.size = null;
+		this.compress = true;
 		this.buffer = Buffer.from('');
 	}
 
 	send(data) {
-		return new Promise((resolve) => {
-			zlib.deflate(data, (err, d) => {
-				if (err) {
-					throw err;
-				}
-				const buf = Buffer.alloc(6);
-				buf.writeIntLE(d.length, 0, 6);
-				this.socket.write(Buffer.concat([buf, d]), () => {
-					resolve();
-				});
-			});
+		return util.package(data, this.compress).then((payload) => {
+			return promisify(this.socket.write.bind(this.socket))(payload);
 		});
 	}
 
@@ -34,12 +28,11 @@ class Client extends events {
 			this.buffer = this.buffer.slice(6, this.buffer.length);
 		}
 		if (this.size !== null && this.buffer.length >= this.size) {
-			zlib.unzip(this.buffer.slice(0, this.size), (err, d) => {
-				if (err) {
-					throw err;
-				}
-				this.handleMessage(d);
-			});
+			util.unpackage(this.buffer.slice(0, this.size), this.compress)
+				.then((data) => this.handleMessage(data))
+				.catch((e) => {
+					throw e;
+				});
 
 			this.buffer = this.buffer.slice(this.size, this.buffer.length);
 			this.size = null;

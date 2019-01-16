@@ -10,9 +10,9 @@ class Client extends base { // server
 			this.buffer = Buffer.concat([this.buffer, data]);
 			this._parse();
 		}).on('close', () => {
-			// clean up
-		}).on('error', () => {
-			// clean up
+			this.emit('close');
+		}).on('error', (err) => {
+			this.emit('error', err);
 		});
 	}
 
@@ -20,7 +20,7 @@ class Client extends base { // server
 		try {
 			this.socket.destroy();
 		} catch(e) {
-		// probably closed
+			// probably closed
 		}
 	}
 

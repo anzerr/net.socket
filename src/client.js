@@ -1,3 +1,4 @@
+
 const url = require('url'),
 	{Socket} = require('net'),
 	base = require('./base.js');
@@ -13,18 +14,20 @@ class Client extends base {
 		});
 		this.socket.on('error', (err) => {
 			this.emit('error', err);
-		});
-		this.socket.on('close', () => {
+		}).on('close', () => {
 			this.emit('close');
-		});
-		this.socket.on('data', (data) => {
+		}).on('data', (data) => {
 			this.buffer = Buffer.concat([this.buffer, data]);
 			this._parse();
 		});
 	}
 
 	close() {
-		this.socket.destroy();
+		try {
+			this.socket.destroy();
+		} catch(e) {
+			// probably closed
+		}
 	}
 
 	handleConnection() {

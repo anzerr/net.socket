@@ -28,5 +28,8 @@
 	"bugs": {
 		"url": "https://github.com/anzerr/net.socket/issues"
 	},
-	"homepage": "https://github.com/anzerr/net.socket#readme"
+	"homepage": "https://github.com/anzerr/net.socket#readme",
+	"dependencies": {
+		"type.util": "git+ssh://git@github.com/anzerr/type.util.git"
+	}
 }
