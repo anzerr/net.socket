@@ -1,35 +1,34 @@
 {
 	"name": "net.socket",
 	"version": "1.0.1",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"setup": "npm install --only=prod"
-	},
 	"keywords": [],
-	"author": "anzerr",
-	"license": "ISC",
-	"devDependencies": {
-		"eslint": "^5.8.0",
-		"eslint-config-basic": "git+https://git@github.com/anzerr/eslintrc.git"
-	},
-	"eslintConfig": {
-		"extends": "eslint-config-basic"
+	"homepage": "https://github.com/anzerr/net.socket#readme",
+	"bugs": {
+		"url": "https://github.com/anzerr/net.socket/issues"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/anzerr/net.socket.git"
 	},
-	"engines": {
-		"node": ">= 0.10.0"
-	},
+	"license": "ISC",
+	"author": "anzerr",
+	"main": "index.js",
 	"types": "index.d.ts",
-	"bugs": {
-		"url": "https://github.com/anzerr/net.socket/issues"
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"setup": "npm install --only=prod"
 	},
-	"homepage": "https://github.com/anzerr/net.socket#readme",
+	"eslintConfig": {
+		"extends": "eslint-config-basic"
+	},
 	"dependencies": {
 		"type.util": "git+https://git@github.com/anzerr/type.util.git"
+	},
+	"devDependencies": {
+		"eslint": "^5.8.0",
+		"eslint-config-basic": "git+https://git@github.com/anzerr/eslintrc.git"
+	},
+	"engines": {
+		"node": ">= 0.10.0"
 	}
 }
