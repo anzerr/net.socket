@@ -1,21 +1,21 @@
 
 import * as events from 'events';
 
-class BaseClient {
-
-	public compress: boolean;
-
-    constructor();
-
-    send(data: any): Promise<void>;
-
-	handleMessage(payload): any;
-
-	close(): void
-
-}
-
 declare namespace netSocket {
+
+	class BaseClient {
+
+		public compress: boolean;
+
+	    constructor();
+
+	    send(data: any): Promise<void>;
+
+		handleMessage(payload): any;
+
+		close(): void
+
+	}
 
 	class Client extends BaseClient {
 
