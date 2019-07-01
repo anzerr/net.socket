@@ -13,6 +13,14 @@ declare namespace netSocket {
 
 		handleMessage(payload): any;
 
+		on(event: string, cd: any): Server;
+
+		once(event: string, cd: any): Server;
+
+		removeListener(event: string, cd: any): Server;
+
+		removeAllListeners(event: string): Server;
+
 		close(): void
 
 	}
@@ -31,7 +39,7 @@ declare namespace netSocket {
 
 	}
 
-	class Server extends events {
+	class Server {
 
 		public socket: any;
 		public compress: boolean;
@@ -43,6 +51,14 @@ declare namespace netSocket {
 		handleMessage(payload: any, client: Client): Server;
 
 		createClient(socket: any, key: string): ServerClient;
+
+		on(event: string, cd: any): Server;
+
+		once(event: string, cd: any): Server;
+
+		removeListener(event: string, cd: any): Server;
+
+		removeAllListeners(event: string): Server;
 
 		key(): string;
 
