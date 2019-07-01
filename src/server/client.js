@@ -2,8 +2,9 @@ const base = require('../base.js');
 
 class Client extends base { // server
 
-	constructor(socket, key) {
+	constructor(socket, key, compress) {
 		super();
+		this.compress = compress;
 		this.socket = socket;
 		this.key = key;
 		this.socket.on('data', (data) => {
@@ -14,14 +15,6 @@ class Client extends base { // server
 		}).on('error', (err) => {
 			this.emit('error', err);
 		});
-	}
-
-	close() {
-		try {
-			this.socket.destroy();
-		} catch(e) {
-			// probably closed
-		}
 	}
 
 	id() {

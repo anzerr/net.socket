@@ -15,8 +15,7 @@
 	"main": "index.js",
 	"types": "index.d.ts",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"setup": "npm install --only=prod"
+		"test": "node test/bench.js"
 	},
 	"eslintConfig": {
 		"extends": "eslint-config-basic"

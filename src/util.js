@@ -1,7 +1,11 @@
 
 const zlib = require('zlib'),
-	{promisify} = require('util'),
-	is = require('type.util');
+	{promisify} = require('util');
+
+const zlip = {
+	deflate: promisify(zlib.deflate),
+	unzip: promisify(zlib.unzip),
+};
 
 class Util {
 
@@ -16,18 +20,16 @@ class Util {
 
 	package(data, compress) {
 		if (!compress) {
-			return Promise.resolve(this.appendSize(is.instance(data, Buffer) ? data : Buffer.from(data)));
+			return Promise.resolve(this.appendSize(Buffer.isBuffer(data, Buffer) ? data : Buffer.from(data)));
 		}
-		return promisify(zlib.deflate)(data).then((d) => {
-			return this.appendSize(d);
-		});
+		return zlip.deflate(data).then((d) => this.appendSize(d));
 	}
 
 	unpackage(data, compress) {
 		if (!compress) {
 			return Promise.resolve(data);
 		}
-		return promisify(zlib.unzip)(data);
+		return zlip.unzip(data);
 	}
 
 }

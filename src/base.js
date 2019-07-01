@@ -8,8 +8,9 @@ class Client extends events {
 	constructor() {
 		super();
 		this.size = null;
-		this.compress = true;
+		this.compress = false;
 		this.buffer = Buffer.from('');
+		this.socket = null;
 	}
 
 	send(data) {
@@ -20,6 +21,17 @@ class Client extends events {
 
 	handleMessage(payload) {
 		return this.emit('message', payload);
+	}
+
+	close() {
+		if (this.socket === null) {
+			throw new Error('no socket to close this.socket should not be null');
+		}
+		try {
+			this.socket.destroy();
+		} catch(e) {
+			// probably closed
+		}
 	}
 
 	_parse() {

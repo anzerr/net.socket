@@ -5,8 +5,9 @@ const url = require('url'),
 
 class Client extends base {
 
-	constructor(uri) {
+	constructor(uri, compress) {
 		super();
+		this.compress = compress;
 		this.uri = url.parse((uri.match(/^.*?:\/\//)) ? uri : 'tcp://' + uri);
 		this.socket = new Socket();
 		this.socket.connect(this.uri.port, this.uri.hostname, () => {
@@ -20,14 +21,6 @@ class Client extends base {
 			this.buffer = Buffer.concat([this.buffer, data]);
 			this._parse();
 		});
-	}
-
-	close() {
-		try {
-			this.socket.destroy();
-		} catch(e) {
-			// probably closed
-		}
 	}
 
 	handleConnection() {

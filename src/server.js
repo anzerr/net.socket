@@ -6,10 +6,11 @@ const url = require('url'),
 
 class Server extends events {
 
-	constructor(uri) {
+	constructor(uri, compress = false) {
 		super();
 		this.uri = url.parse((uri.match(/^.*?:\/\//)) ? uri : 'tcp://' + uri);
 		this.socket = {};
+		this.compress = compress;
 		this.server = createServer((socket) => {
 			let key = this.key();
 			socket.on('close', () => {
@@ -32,6 +33,10 @@ class Server extends events {
 		this.server.listen({host: this.uri.hostname, port: this.uri.port}, () => {
 			this.emit('open');
 		});
+		this._key = {
+			magic: `${Date.now()}.${Math.random().toString(36).substr(2)}`,
+			count: 0
+		};
 	}
 
 	close() {
@@ -52,11 +57,11 @@ class Server extends events {
 	}
 
 	createClient(socket, key) {
-		return new Client(socket, key);
+		return new Client(socket, key, this.compress);
 	}
 
 	key() {
-		return new Date().getTime() + '.' + Math.random().toString(36).substr(2);
+		return `${this._key.magic}.${this._key.count++}`;
 	}
 
 }
