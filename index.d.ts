@@ -9,7 +9,7 @@ declare namespace netSocket {
 
 	    constructor();
 
-	    send(data: any): Promise<void>;
+	    send(data: any): Promise<boolean>;
 
 		handleMessage(payload): any;
 
