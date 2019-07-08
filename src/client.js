@@ -5,7 +5,7 @@ const url = require('url'),
 
 class Client extends base {
 
-	constructor(uri, compress) {
+	constructor(uri, compress = false) {
 		super();
 		this.compress = compress;
 		this.uri = url.parse((uri.match(/^.*?:\/\//)) ? uri : 'tcp://' + uri);

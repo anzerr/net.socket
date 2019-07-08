@@ -1,6 +1,5 @@
-const base = require('../base.js');
 
-class Client extends base { // server
+class Client extends require('../base.js') { // server
 
 	constructor(socket, key, compress) {
 		super();
