@@ -1,14 +1,13 @@
 
 ### Intro
-light wrapper around nodes net.socket
+Light wrapper around nodes net.socket
 
 #### `Install`
 ``` bash
-npm install --save git+https://git@github.com/anzerr/net.socket.git
+npm install --save git+https://github.com/anzerr/net.socket.git
 ```
 
 ### `Example`
-
 Server
 ``` javascript
 const net = require('net.socket');
