@@ -1,6 +1,6 @@
 
 ### Intro
-light wrapper around nodes net.socket
+Light wrapper around nodes net.socket
 
 #### `Install`
 ``` bash
@@ -9,7 +9,6 @@ npm install --save @anzerr/net.socket
 ```
 
 ### `Example`
-
 Server
 ``` javascript
 const net = require('net.socket');

@@ -1,6 +1,6 @@
 {
 	"name": "net.socket",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"keywords": [],
 	"homepage": "https://github.com/anzerr/net.socket#readme",
 	"bugs": {
@@ -24,7 +24,6 @@
 		"type.util": "git+https://git@github.com/anzerr/type.util.git"
 	},
 	"devDependencies": {
-		"eslint": "5.11.1",
 		"eslint-config-basic": "git+https://git@github.com/anzerr/eslintrc.git"
 	},
 	"engines": {
