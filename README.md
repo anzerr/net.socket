@@ -4,7 +4,8 @@ light wrapper around nodes net.socket
 
 #### `Install`
 ``` bash
-npm install --save git+https://git@github.com/anzerr/net.socket.git
+npm install --save git+https://github.com/anzerr/net.socket.git
+npm install --save @anzerr/net.socket
 ```
 
 ### `Example`
