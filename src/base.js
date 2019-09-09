@@ -35,7 +35,7 @@ class Client extends events {
 	}
 
 	_parse() {
-		if (!this.size && this.buffer.length > 0) {
+		if (!this.size && this.buffer.length >= 6) {
 			this.size = this.buffer.readIntLE(0, 6);
 			this.buffer = this.buffer.slice(6, this.buffer.length);
 		}

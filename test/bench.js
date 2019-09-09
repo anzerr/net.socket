@@ -30,10 +30,10 @@ server.on('open', () => {
 	}
 });
 
-console.log('running bench for 30sec');
+console.log('running bench for 10sec');
 setTimeout(() => {
 	server.close();
 	const diff = process.hrtime(start), sec = (diff[0] * NS_PER_SEC + diff[1]) / NS_PER_SEC;
 	console.log(payload, payload / sec, sec);
 	process.exit(0);
-}, 30 * 1000);
+}, 10 * 1000);

@@ -1,5 +1,9 @@
 
 ### Intro
+![GitHub Actions status | linter](https://github.com/anzerr/net.socket/workflows/linter/badge.svg)
+![GitHub Actions status | publish](https://github.com/anzerr/net.socket/workflows/publish/badge.svg)
+![GitHub Actions status | test](https://github.com/anzerr/net.socket/workflows/test/badge.svg)
+
 Light wrapper around nodes net.socket
 
 #### `Install`
