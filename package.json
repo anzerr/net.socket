@@ -1,7 +1,13 @@
 {
 	"name": "net.socket",
 	"version": "1.0.15",
-	"keywords": [],
+	"description": "Server and client for tcp sockets",
+	"keywords": [
+		"nodejs",
+		"socket",
+		"tcp",
+		"util"
+	],
 	"homepage": "https://github.com/anzerr/net.socket#readme",
 	"bugs": {
 		"url": "https://github.com/anzerr/net.socket/issues"
